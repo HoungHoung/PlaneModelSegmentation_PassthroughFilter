@@ -3,4 +3,7 @@
 * PCL 1.8.1
 * VTK 8.2.0
 ## Result
-<img align="center" src="https://github.com/HoungHoung/PlaneModelSegmentation_PassthroughFilter/raw/master/2.png">
+### Before
+![image](https://github.com/HoungHoung/PlaneModelSegmentation_PassthroughFilter/raw/master/2.png)
+### After
+![image](https://github.com/HoungHoung/PlaneModelSegmentation_PassthroughFilter/raw/master/5.png)

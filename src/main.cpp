@@ -19,6 +19,33 @@ using namespace std;
 
 int user_data;
 
+//	PCD to PLY convertor
+int PCDtoPLYconvertor(string & input_filename)
+{
+	pcl::PCLPointCloud2 cloud;
+	if (pcl::io::loadPCDFile(input_filename, cloud) == -1)
+	{
+		cout << "Error: cannot load the PCD file!!!" << endl;
+		return -1;
+	}
+	PLYWriter writer;
+	writer.write(".//Data//PLY//output.ply", cloud, Eigen::Vector4f::Zero(), Eigen::Quaternionf::Identity(), true, true);
+	return 0;
+}
+
+// PLY to PCD convertor
+int PLYtoPCDconvertor(string& input_filename)
+{
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+	if (pcl::io::loadPLYFile(input_filename, *cloud) == -1)
+	{
+		cout << "Error: cannot load the PLY file!!!" << endl;
+		return -1;
+	}
+	pcl::io::savePCDFile(".//Data//PCD//output.pcd", *cloud);
+	return 0;
+}
+
 //	Visualization PCD point cloud data
 void viewerOneOff(pcl::visualization::PCLVisualizer& viewer)
 {
@@ -53,6 +80,22 @@ int VisualizationPCD(string& input_filename)
 	{
 		user_data++;
 	}
+	return 0;
+}
+
+//	Visualization PLY point cloud data
+int VisualizationPLY(string& input_filename)
+{
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+	if (pcl::io::loadPLYFile<pcl::PointXYZ>(input_filename, *cloud) == -1)
+	{
+		PCL_ERROR("Couldn't read file PLY \n");
+		return (-1);
+	}
+	pcl::visualization::PCLVisualizer viewer("Simple visualizing window");
+	viewer.addPointCloud(cloud, "cloud");
+	viewer.spinOnce();
+	viewer.removePointCloud("cloud");
 	return 0;
 }
 
@@ -102,7 +145,7 @@ int main()
 
 	pt.setInputCloud(cloud_filtered);
 	pt.setFilterFieldName("x");
-	pt.setFilterLimits(-0.69, 0.43);
+	pt.setFilterLimits(-0.67, 0.43);
 	pt.filter(*cloud_filtered);
 
 	pcl::visualization::CloudViewer viewer("Filtered");
@@ -112,5 +155,8 @@ int main()
 	{
 
 	}
+
+	/*string input_filename = "3dpoints_ground.pcd";
+	VisualizationPCD(input_filename);*/
 	return 0;
 }

@@ -4,6 +4,6 @@
 * VTK 8.2.0
 ## Result
 ### Before
-![image](https://github.com/HoungHoung/PlaneModelSegmentation_PassthroughFilter/raw/master/2.png)
+![image](https://github.com/HoungHoung/PlaneModelSegmentation_PassthroughFilter/master/2.png)
 ### After
-![image](https://github.com/HoungHoung/PlaneModelSegmentation_PassthroughFilter/raw/master/5.png)
+![image](https://github.com/HoungHoung/PlaneModelSegmentation_PassthroughFilter/master/5.png)
